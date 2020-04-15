@@ -12,48 +12,47 @@ public class CrowdAgent : Agent
     private Renderer m_floorMat;
     private Rigidbody m_AgentRb;
 
-    // private RayPerceptionSensor m_perception;
     private static Color FloorColor = new Color(5/255, 30/255, 36/255, 1);
 
-    // public float minX;
-    // public float maxX;
-    // public float minZ;
-    // public float maxZ;
+    private float m_minX;
+    private float m_maxX;
+    private float m_minZ;
+    private float m_maxZ;
 
-    private void Start() {
-        // m_perception = GetComponent<RayPerceptionSensor>();
+    // private void Start() {
 
-        m_floorMat = Floor.GetComponent<Renderer>();
-        m_floorMat.material.color = FloorColor;
-
-
-        // minX = -45.0f;
-        // maxX = 45.0f;
-
-        // minZ = -45.0f;
-        // maxZ = 45.0f;
-
-        m_AgentRb.angularVelocity = Vector3.zero;
-        m_AgentRb.velocity = Vector3.zero;
-        gameObject.transform.position = new Vector3( 0, 0.5f, 0);
-    }
+    // }
 
     public override void Initialize()
     {
+        m_floorMat = Floor.GetComponent<Renderer>();
+        m_floorMat.material.color = FloorColor;
+
         m_AgentRb = GetComponent<Rigidbody>();
+
+
+        m_minX = -45.0f;
+        m_maxX = 45.0f;
+
+        m_minZ = -45.0f;
+        m_maxZ = 45.0f;
+
+        m_AgentRb.angularVelocity = Vector3.zero;
+        m_AgentRb.velocity = Vector3.zero;
+        gameObject.transform.position = new Vector3( 0, Floor.transform.position.y + 0.5f, 0);
     }
 
-    // public override void CollectObservations(VectorSensor sensor)
-    // {
-    //     sensor.AddObservation(transform.InverseTransformDirection(m_AgentRb.velocity));
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        // sensor.AddObservation(transform.InverseTransformDirection(m_AgentRb.velocity));
 
-    //     sensor.AddObservation(gameObject.transform.position.x);
-    //     sensor.AddObservation(gameObject.transform.position.z);
-    //     // sensor.AddObservation(m_AgentRb.velocity.x);
-    //     // sensor.AddObservation(m_AgentRb.velocity.z);
+        sensor.AddObservation(gameObject.transform.position.x);
+        sensor.AddObservation(gameObject.transform.position.z);
+        sensor.AddObservation(m_AgentRb.velocity.x);
+        sensor.AddObservation(m_AgentRb.velocity.z);
 
-    //     // sensor.AddObservation(FlagGameObject.transform.position);
-    // }
+        // sensor.AddObservation(FlagGameObject.transform.position);
+    }
 
     // public void MoveAgent(float[] act)
     // {
@@ -110,15 +109,14 @@ public class CrowdAgent : Agent
                 break;
         }
         transform.Rotate(rotateDir, Time.fixedDeltaTime * 200f);
-        m_AgentRb.AddForce(dirToGo * 2f,
-                           ForceMode.VelocityChange);
+        m_AgentRb.AddForce(dirToGo * 2f, ForceMode.VelocityChange);
     }
 
     public override void OnActionReceived(float[] vectorAction)
     {
         MoveAgent(vectorAction);
 
-        if (transform.position.y < 0) {
+        if (transform.position.y < Floor.transform.position.y) {
             AddReward(-1.5f);
             EndEpisode();
 
@@ -174,12 +172,12 @@ public class CrowdAgent : Agent
         m_floorMat.material.color = FloorColor;
         m_AgentRb.angularVelocity = Vector3.zero;
         m_AgentRb.velocity = Vector3.zero;
-        gameObject.transform.position = new Vector3( 0, 0.5f, 0);
+        gameObject.transform.position = new Vector3( 0, Floor.transform.position.y + 0.5f, 0);
 
-        FlagGameObject.transform.position = new Vector3(20, 0, 20);
+        // FlagGameObject.transform.position = new Vector3(20, 0, 20);
 
-        // FlagGameObject.transform.position = new Vector3(Random.Range(minX, maxX),
-        //                                                 0,
-        //                                                 Random.Range(minZ, maxZ));
+        FlagGameObject.transform.position = new Vector3(Random.Range(m_minX, m_maxX),
+                                                        Floor.transform.position.y,
+                                                        Random.Range(m_minZ, m_maxZ));
     }
 }
