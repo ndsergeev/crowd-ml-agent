@@ -100,28 +100,6 @@ public class CrowdAgent : Agent
         }
 
         AddReward(-10f / maxStep);
-        // if (Mathf.Abs(transform.position.x) > 47 || Mathf.Abs(transform.position.z) > 47)
-        // {
-        //     AddReward(-0.1f);
-        //     EndEpisode();
-        // }
-        // else
-        // {
-        // if (Vector3.Distance(FlagGameObject.transform.position, gameObject.transform.position) < 5) {
-        //     AddReward(2f);
-        //     EndEpisode();
-        // }
-        // if (transform.position.y<0) {
-        //     AddReward(-1f);
-        //     EndEpisode();
-        // }
-
-        // if (Vector3.Distance(FlagGameObject.transform.position, gameObject.transform.position) < 2f) {
-        //     AddReward(1.5f);
-        //     EndEpisode();
-        // }
-        // AddReward(.01f / Vector3.Distance(FlagGameObject.transform.position, gameObject.transform.position) - 0.0004f); // I think I can make an equation to balance with
-        // }
     }
 
     IEnumerator RewardAndChangeMaterial(Color col, float time)

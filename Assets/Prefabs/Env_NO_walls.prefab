@@ -33,6 +33,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1836327376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6514306574621133994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor_floor
+  m_DetectableTags: []
+  m_RaysPerDirection: 1
+  m_MaxRayDegrees: 45
+  m_SphereCastRadius: 0.5
+  m_RayLength: 10
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_ObservationStacks: 1
+  rayHitColor: {r: 1, g: 0, b: 0.9281521, a: 1}
+  rayMissColor: {r: 0, g: 0, b: 0, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: -0.5
 --- !u!1001 &1072243486002756597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,7 +179,12 @@ PrefabInstance:
     - target: {fileID: 4807407950090509615, guid: f53651d31e871430d948efd477b1ddeb,
         type: 3}
       propertyPath: m_EndVerticalOffset
-      value: -0.5
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807407950090509615, guid: f53651d31e871430d948efd477b1ddeb,
+        type: 3}
+      propertyPath: m_SensorName
+      value: RayPerceptionSensor_flag
       objectReference: {fileID: 0}
     - target: {fileID: 6090600163353786207, guid: f53651d31e871430d948efd477b1ddeb,
         type: 3}
@@ -233,6 +264,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3775267597901452522, guid: f53651d31e871430d948efd477b1ddeb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f53651d31e871430d948efd477b1ddeb, type: 3}
+--- !u!1 &6514306574621133994 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6090600163353786207, guid: f53651d31e871430d948efd477b1ddeb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1072243486002756597}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7859357932100671253 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7202192188479499488, guid: f53651d31e871430d948efd477b1ddeb,
