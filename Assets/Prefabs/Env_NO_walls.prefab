@@ -140,6 +140,21 @@ PrefabInstance:
       propertyPath: m_RayLength
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 4807407950090509615, guid: f53651d31e871430d948efd477b1ddeb,
+        type: 3}
+      propertyPath: m_RaysPerDirection
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807407950090509615, guid: f53651d31e871430d948efd477b1ddeb,
+        type: 3}
+      propertyPath: m_RayLayerMask.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807407950090509615, guid: f53651d31e871430d948efd477b1ddeb,
+        type: 3}
+      propertyPath: m_EndVerticalOffset
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6090600163353786207, guid: f53651d31e871430d948efd477b1ddeb,
         type: 3}
       propertyPath: m_Name

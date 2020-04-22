@@ -54,31 +54,6 @@ public class CrowdAgent : Agent
         // sensor.AddObservation(FlagGameObject.transform.position);
     }
 
-    // public void MoveAgent(float[] act)
-    // {
-    //     var dirToGo = Vector3.zero;
-    //     var rotateDir = Vector3.zero;
-
-    //     var action = Mathf.FloorToInt(act[0]);
-    //     switch (action)
-    //     {
-    //         case 1:
-    //             dirToGo = transform.forward * 1f;
-    //             break;
-    //         case 2:
-    //             dirToGo = transform.forward * -1f;
-    //             break;
-    //         case 3:
-    //             rotateDir = transform.up * 1f;
-    //             break;
-    //         case 4:
-    //             rotateDir = transform.up * -1f;
-    //             break;
-    //     }
-    //     transform.Rotate(rotateDir, Time.deltaTime * 200f);
-    //     m_AgentRb.AddForce(dirToGo * 2f, ForceMode.VelocityChange);
-    // }
-
     public void MoveAgent(float[] act)
     {
         var dirToGo = Vector3.zero;
@@ -124,7 +99,7 @@ public class CrowdAgent : Agent
             StartCoroutine(RewardAndChangeMaterial(FloorColor, 1f));
         }
 
-        AddReward(-1f / maxStep);
+        AddReward(-10f / maxStep);
         // if (Mathf.Abs(transform.position.x) > 47 || Mathf.Abs(transform.position.z) > 47)
         // {
         //     AddReward(-0.1f);
