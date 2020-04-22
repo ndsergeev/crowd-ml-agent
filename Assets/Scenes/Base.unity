@@ -438,11 +438,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Env_NO_walls
       objectReference: {fileID: 0}
-    - target: {fileID: 4216827359180812062, guid: b6305e734c41144b5993c38bcb122930,
-        type: 3}
-      propertyPath: m_BrainParameters.vectorObservationSize
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4449318720957384604, guid: b6305e734c41144b5993c38bcb122930,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -497,11 +492,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5500592566231574234, guid: b6305e734c41144b5993c38bcb122930,
-        type: 3}
-      propertyPath: m_RaysPerDirection
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6305e734c41144b5993c38bcb122930, type: 3}

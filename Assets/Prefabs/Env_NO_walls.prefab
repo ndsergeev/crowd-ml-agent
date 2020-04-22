@@ -169,7 +169,7 @@ PrefabInstance:
     - target: {fileID: 4807407950090509615, guid: f53651d31e871430d948efd477b1ddeb,
         type: 3}
       propertyPath: m_RaysPerDirection
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4807407950090509615, guid: f53651d31e871430d948efd477b1ddeb,
         type: 3}
@@ -189,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 4807407950090509615, guid: f53651d31e871430d948efd477b1ddeb,
         type: 3}
       propertyPath: m_MaxRayDegrees
-      value: 180
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6090600163353786207, guid: f53651d31e871430d948efd477b1ddeb,
         type: 3}
