@@ -1,18 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿// using UnityEngine;
+// using MLAgents;
+// using MLAgentsExamples;
 
-public class CrowdEnv : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+// public class CrowdEnv : Area
+// {
+//     public override void ResetArea()
+//     {
+//         ResetWalls();
+//         PositionAgents();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+//     }
+
+//     private static Vector3 ChooseRandomPosition()
+//     {
+//         return Vector3.zero;
+//     }
+
+//     private void ResetWalls()
+//     {
+
+//     }
+
+//     private void PositionAgents()
+//     {
+
+//     }
+// }
