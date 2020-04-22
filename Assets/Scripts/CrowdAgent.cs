@@ -46,10 +46,10 @@ public class CrowdAgent : Agent
     {
         // sensor.AddObservation(transform.InverseTransformDirection(m_AgentRb.velocity));
 
-        sensor.AddObservation(gameObject.transform.position.x);
-        sensor.AddObservation(gameObject.transform.position.z);
-        sensor.AddObservation(m_AgentRb.velocity.x);
-        sensor.AddObservation(m_AgentRb.velocity.z);
+        // sensor.AddObservation(gameObject.transform.position.x);
+        // sensor.AddObservation(gameObject.transform.position.z);
+        // sensor.AddObservation(m_AgentRb.velocity.x);
+        // sensor.AddObservation(m_AgentRb.velocity.z);
 
         // sensor.AddObservation(FlagGameObject.transform.position);
     }
@@ -91,15 +91,16 @@ public class CrowdAgent : Agent
     {
         MoveAgent(vectorAction);
 
-        if (transform.position.y < Floor.transform.position.y) {
-            AddReward(-1.5f);
+        if (transform.position.y < Floor.transform.position.y)
+        {
+            AddReward(-0.5f);
             EndEpisode();
 
             m_floorMat.material.color = Color.red;
             StartCoroutine(RewardAndChangeMaterial(FloorColor, 1f));
         }
 
-        AddReward(-10f / maxStep);
+        AddReward(-1f / maxStep);
     }
 
     IEnumerator RewardAndChangeMaterial(Color col, float time)
@@ -112,7 +113,7 @@ public class CrowdAgent : Agent
     {
         if (collision.gameObject.CompareTag("Finish"))
         {
-            SetReward(5f);
+            SetReward(20f);
             EndEpisode();
 
             m_floorMat.material.color = Color.green;
