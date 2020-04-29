@@ -160,7 +160,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: 0a2970d03cfd4471f9f41f16420b9e50,
+        type: 3}
     - target: {fileID: 4807407950090509615, guid: f53651d31e871430d948efd477b1ddeb,
         type: 3}
       propertyPath: m_RayLength

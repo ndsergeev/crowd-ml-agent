@@ -19,6 +19,8 @@ public class CrowdAgent : Agent
     private float m_minZ;
     private float m_maxZ;
 
+    private float m_punisher;
+
     // private void Start() {
 
     // }
@@ -36,6 +38,8 @@ public class CrowdAgent : Agent
 
         m_minZ = -45.0f;
         m_maxZ = 45.0f;
+
+        m_punisher = 0f;
 
         m_AgentRb.angularVelocity = Vector3.zero;
         m_AgentRb.velocity = Vector3.zero;
@@ -93,14 +97,17 @@ public class CrowdAgent : Agent
 
         if (transform.position.y < Floor.transform.position.y)
         {
-            AddReward(-0.5f);
+            AddReward(-5f);
             EndEpisode();
+            m_punisher = 0f;
 
             m_floorMat.material.color = Color.red;
             StartCoroutine(RewardAndChangeMaterial(FloorColor, 1f));
         }
 
-        AddReward(-1f / maxStep);
+        m_punisher += 0.1f;
+
+        AddReward(-m_punisher / maxStep);
     }
 
     IEnumerator RewardAndChangeMaterial(Color col, float time)
@@ -115,6 +122,7 @@ public class CrowdAgent : Agent
         {
             SetReward(20f);
             EndEpisode();
+            m_punisher = 0f;
 
             m_floorMat.material.color = Color.green;
             StartCoroutine(RewardAndChangeMaterial(FloorColor, 1f));
