@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 using MLAgents;
 using MLAgents.Sensors;
 
-public class CrowdAgent : Agent
+public class SingleAgent : Agent
 {
     public GameObject FlagGameObject;
     public GameObject Floor;

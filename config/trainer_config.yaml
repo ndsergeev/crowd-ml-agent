@@ -2,7 +2,7 @@ default:
     trainer: ppo
     batch_size: 1024
     beta: 5.0e-3
-    buffer_size: 10240
+    buffer_size: 1024
     epsilon: 0.2
     hidden_units: 128
     lambd: 0.95
@@ -33,3 +33,16 @@ CrowdAgent:
     summary_freq: 2500
     time_horizon: 64
     num_layers: 2
+
+Crowd:
+    max_steps: 5.0e6
+    num_epoch: 6
+    batch_size: 1024
+    buffer_size: 2048
+    beta: 1e-3
+    hidden_units: 512
+    summary_freq: 2500
+    time_horizon: 64
+    num_layers: 2
+    use_recurrent: false
+    memory_size: 256
