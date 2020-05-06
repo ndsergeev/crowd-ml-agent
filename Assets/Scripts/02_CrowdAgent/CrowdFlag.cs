@@ -2,5 +2,5 @@
 
 public class CrowdFlag : MonoBehaviour
 {
-    public int individualTag = 0;
+    // public int individualTag = 0;
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CrowdEnvManager : MonoBehaviour
 {
-    public Camera camera;
+    public Camera myCamera;
     public GameObject instancePlane;
     public GameObject instanceAgent;
     public GameObject instanceFlag;
@@ -15,7 +15,7 @@ public class CrowdEnvManager : MonoBehaviour
     private static Color FloorColor = new Color(5/255, 30/255, 36/255, 1);
 
     public List<GameObject> m_Agents = new List<GameObject>();
-    public List<GameObject> m_Flags = new List<GameObject>();
+    // public List<GameObject> m_Flags = new List<GameObject>();
 
     public int maxInstanceNumber;
     public int planeSquareScale;
@@ -23,18 +23,19 @@ public class CrowdEnvManager : MonoBehaviour
     private float m_MaxX;
     private float m_MinZ;
     private float m_MaxZ;
-    private int m_Counter = 0;
+    public int m_FailCounter = 0;
+    public int m_FlagCounter = 0;
 
     private Coroutine m_Coroutine = null;
 
     private void Start() {
-        if (camera == null) {
-            camera = Camera.main;
+        if (myCamera == null) {
+            myCamera = Camera.main;
         }
 
         var angle = 75 * Mathf.PI / 180;
 
-        camera.transform.position = new Vector3(Mathf.Cos(angle) * planeSquareScale * .6f,
+        myCamera.transform.position = new Vector3(Mathf.Cos(angle) * planeSquareScale * .6f,
                                                 Mathf.Sin(angle) * planeSquareScale * .6f, 0);
 
         instancePlane.transform.localScale = new Vector3(planeSquareScale, 1, planeSquareScale);
@@ -52,7 +53,9 @@ public class CrowdEnvManager : MonoBehaviour
     }
 
     private void Update() {
-        if (m_Counter > 5) {
+        if (m_FlagCounter > maxInstanceNumber - 1) {
+            EndEpoch(Color.green);
+        } else if (m_FailCounter > maxInstanceNumber - m_FlagCounter - 1) {
             EndEpoch(Color.red);
         }
     }
@@ -71,33 +74,35 @@ public class CrowdEnvManager : MonoBehaviour
         return go;
     }
 
+    GameObject SpawenerAtThePlane(GameObject instance, Quaternion rotation) {
+        GameObject go = GameObject.Instantiate(instance,
+                                               RandomPosition(),
+                                               rotation,
+                                               gameObject.transform);
+        return go;
+    }
+
     public void SpawnAgentsAndFlags() {
         for (int i = 0; i < maxInstanceNumber; ++i) {
-            var col = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+            // var col = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
 
             var agent = SpawenerAtThePlane(instanceAgent);
             var agentComponent = agent.GetComponent<CrowdAgent>();
             agentComponent.individualTag = i;
-            agent.transform.GetChild(0).GetComponent<Renderer>().material.color = col;
+            agent.transform.GetChild(0).GetComponent<Renderer>().material.color = Color.green;
             m_Agents.Add(agent);
 
-            var flag = SpawenerAtThePlane(instanceFlag);
-            flag.GetComponent<CrowdFlag>().individualTag = i;
-            flag.transform.GetChild(1).GetComponent<Renderer>().material.color = col;
-            m_Flags.Add(flag);
-
-            agentComponent.agentFlag = flag.transform;
+            var flag = SpawenerAtThePlane(instanceFlag, Quaternion.Euler(0, 90, 0));
+            flag.transform.GetChild(1).GetComponent<Renderer>().material.color = Color.red;
         }
     }
 
-    public void Increment() {
-        m_Counter++;
+    public void FailIncrement() {
+        m_FailCounter++;
     }
 
-    public void ShuffleObjects() {
-        foreach (Transform child in transform) {
-            child.position = RandomPosition();
-        }
+    public void FlagIncrement() {
+        m_FlagCounter++;
     }
 
     IEnumerator RewardAndChangeMaterial(Color col, float time) {
@@ -109,22 +114,33 @@ public class CrowdEnvManager : MonoBehaviour
 
     public void EndEpoch(Color col) {
         if (m_Coroutine == null) {
-            StartCoroutine(RewardAndChangeMaterial(col, 2f));
+            m_Coroutine = StartCoroutine(RewardAndChangeMaterial(col, 2f));
         }
 
-        m_Counter = 0;
+        m_FlagCounter = 0;
+        m_FailCounter = 0;
+
+        ActivateAllFlags();
 
         foreach (var agent in m_Agents) {
             agent.GetComponent<CrowdAgent>().EndEpisode();
         }
+    }
 
-        foreach (var flag in m_Flags) {
-            flag.transform.position = RandomPosition();
+    public void SpawnFlag() {
+        var flag = SpawenerAtThePlane(instanceFlag, Quaternion.Euler(0, 90, 0));
+        flag.transform.GetChild(1).GetComponent<Renderer>().material.color = Color.red;
+    }
+
+    public void ActivateAllFlags() {
+        foreach (Transform child in transform) {
+            child.gameObject.SetActive(true);
+            child.position = RandomPosition();
         }
     }
 
-    // Just in case function
-    public void BeginEpoch() {
-        m_FloorMat.material.color = FloorColor;
+    public void ResetCounters() {
+        m_FlagCounter = 0;
+        m_FailCounter = 0;
     }
 }
