@@ -14,9 +14,11 @@ public class CrowdAgent : Agent
     private CrowdEnvManager m_Parent;
     private float m_Punisher;
     private bool m_Done;
+    private bool m_Fail;
 
     public override void Initialize() {
         m_Done = false;
+        m_Fail = false;
 
         m_Parent = transform.parent.gameObject.GetComponent<CrowdEnvManager>();
 
@@ -39,7 +41,7 @@ public class CrowdAgent : Agent
         var dirToGo = Vector3.zero;
         var rotateDir = Vector3.zero;
 
-        if (m_Done == false) {
+        if (m_Done == false && m_Fail == false) {
             var action = Mathf.FloorToInt(act[0]);
 
             switch (action)
@@ -64,7 +66,7 @@ public class CrowdAgent : Agent
                     break;
             }
         }
-        
+
         transform.Rotate(rotateDir, Time.fixedDeltaTime * 200f);
         m_AgentRb.AddForce(dirToGo * 2f, ForceMode.VelocityChange);
     
@@ -73,28 +75,30 @@ public class CrowdAgent : Agent
     public override void OnActionReceived(float[] vectorAction) {
         MoveAgent(vectorAction);
 
-        if (transform.position.y < m_Floor.transform.position.y) {
+        if (transform.position.y < m_Floor.transform.position.y && m_Fail == false) {
             AddReward(-2f);
             m_Parent.FailIncrement();
-            transform.position = m_Parent.RandomPosition();
+            m_Fail = true;
         }
         
-        if (m_Done == false) {
+        if (m_Done == false && m_Fail == false) {
             m_Punisher += 0.05f;
             AddReward(-m_Punisher / maxStep);
         }
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Flag")) {
-            SetReward(m_Parent.m_FlagCounter / m_Parent.maxInstanceNumber);
-            collision.gameObject.SetActive(false);
-            // Destroy(collision.gameObject);
-            m_Parent.FlagIncrement();
+        if (m_Done == false && m_Fail == false) {
+            if (collision.gameObject.CompareTag("Flag")) {
+                SetReward(2 * m_Parent.m_FlagCounter / m_Parent.maxInstanceNumber);
+                collision.gameObject.SetActive(false);
+                // Destroy(collision.gameObject);
+                m_Parent.FlagIncrement();
 
-            m_Done = true;
-        } else if (collision.gameObject.CompareTag("Agent")) {
-            SetReward(-1f);
+                m_Done = true;
+            } else if (collision.gameObject.CompareTag("Agent")) {
+                SetReward(-2f);
+            }
         }
     }
 
@@ -103,6 +107,9 @@ public class CrowdAgent : Agent
         m_AgentRb.velocity = Vector3.zero;
         m_Punisher = 0f;
 
+        transform.position = m_Parent.RandomPosition();
+
+        m_Fail = false;
         m_Done = false;
 
         m_Parent.ResetCounters();

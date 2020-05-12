@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Agent
   - Flag
+  - Plane
   layers:
   - Default
   - TransparentFX

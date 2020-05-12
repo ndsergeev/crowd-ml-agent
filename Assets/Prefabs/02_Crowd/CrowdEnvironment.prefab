@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77455e2928544e2db51649880709f5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
+  myCamera: {fileID: 0}
   instancePlane: {fileID: 2976354170503715340}
   instanceAgent: {fileID: 6090600163353786207, guid: ffcf3d07096e44934ae2ba6586969f6e,
     type: 3}
@@ -84,9 +84,10 @@ MonoBehaviour:
   instanceObstacle: {fileID: 5421377424162064655, guid: 5332b5552dc424b38b17f1460070386a,
     type: 3}
   m_Agents: []
-  m_Flags: []
   maxInstanceNumber: 20
   planeSquareScale: 80
+  m_FailCounter: 0
+  m_FlagCounter: 0
 --- !u!1001 &8392298220459627478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,16 +154,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CrowdPlane
-      objectReference: {fileID: 0}
-    - target: {fileID: 7988453196595366405, guid: 55203445e418f4487a6dc163d85d23a7,
-        type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7988453196595366405, guid: 55203445e418f4487a6dc163d85d23a7,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55203445e418f4487a6dc163d85d23a7, type: 3}

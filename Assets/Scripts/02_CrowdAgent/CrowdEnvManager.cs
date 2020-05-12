@@ -53,9 +53,10 @@ public class CrowdEnvManager : MonoBehaviour
     }
 
     private void Update() {
-        if (m_FlagCounter > maxInstanceNumber - 1) {
+        // but better is maxInstanceNumber - 1
+        if (m_FlagCounter > maxInstanceNumber - 2) {
             EndEpoch(Color.green);
-        } else if (m_FailCounter > maxInstanceNumber - m_FlagCounter - 1) {
+        } else if (maxInstanceNumber - m_FailCounter - m_FlagCounter < 1) {
             EndEpoch(Color.red);
         }
     }

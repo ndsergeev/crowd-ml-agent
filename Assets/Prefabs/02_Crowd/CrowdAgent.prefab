@@ -390,7 +390,7 @@ GameObject:
   - component: {fileID: 3962613653897721677}
   m_Layer: 0
   m_Name: CrowdAgent
-  m_TagString: Untagged
+  m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -480,7 +480,7 @@ MonoBehaviour:
     vectorActionSize: 06000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: c722c9acd5a0c4bd19a2a71681818805, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Crowd
@@ -499,8 +499,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: RayPerceptionSensorMain
-  m_DetectableTags: []
-  m_RaysPerDirection: 6
+  m_DetectableTags:
+  - Agent
+  - Flag
+  m_RaysPerDirection: 4
   m_MaxRayDegrees: 70
   m_SphereCastRadius: 0.5
   m_RayLength: 20
@@ -525,19 +527,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: RayPerceptionSensorFloor
-  m_DetectableTags: []
+  m_DetectableTags:
+  - Plane
   m_RaysPerDirection: 1
   m_MaxRayDegrees: 70
   m_SphereCastRadius: 0.5
-  m_RayLength: 10
+  m_RayLength: 15
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 1
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0.88127184, a: 1}
   rayMissColor: {r: 0.94654095, g: 1, b: 0.11792451, a: 1}
-  m_StartVerticalOffset: 1
-  m_EndVerticalOffset: -0.55
+  m_StartVerticalOffset: 0.5
+  m_EndVerticalOffset: -0.5
 --- !u!114 &3962613653897721677
 MonoBehaviour:
   m_ObjectHideFlags: 0
