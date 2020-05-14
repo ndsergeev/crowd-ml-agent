@@ -63,7 +63,7 @@ public class CrowdAgent : Agent
                     break;
                 case 6:
                     dirToGo = transform.right * 0.75f;
-                    break;
+                    break; 
             }
         }
 
@@ -76,7 +76,7 @@ public class CrowdAgent : Agent
         MoveAgent(vectorAction);
 
         if (transform.position.y < m_Floor.transform.position.y && m_Fail == false) {
-            AddReward(-2f);
+            AddReward(-3f);
             m_Parent.FailIncrement();
             m_Fail = true;
         }
@@ -90,14 +90,17 @@ public class CrowdAgent : Agent
     void OnCollisionEnter(Collision collision) {
         if (m_Done == false && m_Fail == false) {
             if (collision.gameObject.CompareTag("Flag")) {
-                SetReward(2 * m_Parent.m_FlagCounter / m_Parent.maxInstanceNumber);
+                // SetReward(2 * m_Parent.m_FlagCounter / m_Parent.maxInstanceNumber);
+                SetReward(1);
                 collision.gameObject.SetActive(false);
-                // Destroy(collision.gameObject);
                 m_Parent.FlagIncrement();
 
                 m_Done = true;
+
+                m_AgentRb.angularVelocity = Vector3.zero;
+                m_AgentRb.velocity = Vector3.zero;
             } else if (collision.gameObject.CompareTag("Agent")) {
-                SetReward(-2f);
+                SetReward(-1f);
             }
         }
     }
