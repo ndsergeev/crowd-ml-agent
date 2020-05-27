@@ -117,8 +117,7 @@ public class CrowdEnvManager : MonoBehaviour
             m_Coroutine = StartCoroutine(RewardAndChangeMaterial(col, 2f));
         }
 
-        m_FlagCounter = 0;
-        m_FailCounter = 0;
+        ResetCounters();
 
         ActivateAllFlags();
 

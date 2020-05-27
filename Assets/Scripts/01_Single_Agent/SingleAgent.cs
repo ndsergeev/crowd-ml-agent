@@ -60,12 +60,14 @@ public class SingleAgent : Agent
 
     public void MoveAgent(float[] act)
     {
+        Debug.Log("Length" + (act.Length).ToString());
+        Debug.Log("Element" + (act[0]).ToString());
+
         var dirToGo = Vector3.zero;
         var rotateDir = Vector3.zero;
 
         var action = Mathf.FloorToInt(act[0]);
 
-        // Goalies and Strikers have slightly different action spaces.
         switch (action)
         {
             case 1:

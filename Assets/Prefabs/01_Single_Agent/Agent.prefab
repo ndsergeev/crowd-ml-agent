@@ -463,10 +463,6 @@ MonoBehaviour:
   maxStep: 5000
   FlagGameObject: {fileID: 0}
   Floor: {fileID: 0}
-  minX: 0
-  maxX: 0
-  minZ: 0
-  maxZ: 0
 --- !u!114 &3775267597901452522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,12 +479,8 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   maxStep: 5000
-  FlagGameObject: {fileID: 0}
-  Floor: {fileID: 0}
-  minX: 0
-  maxX: 0
-  minZ: 0
-  maxZ: 0
+  individualTag: 0
+  agentFlag: {fileID: 0}
 --- !u!114 &3775267597901452523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +520,7 @@ MonoBehaviour:
   m_SensorName: RayPerceptionSensor
   m_DetectableTags: []
   m_RaysPerDirection: 6
-  m_MaxRayDegrees: 70
+  m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.5
   m_RayLength: 20
   m_RayLayerMask:

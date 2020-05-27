@@ -43,5 +43,5 @@ Crowd:
     summary_freq: 2500
     time_horizon: 64
     num_layers: 2
-    use_recurrent: true
+    use_recurrent: false
     memory_size: 256
