@@ -12,9 +12,11 @@ public class CrowdAgent : Agent
     private GameObject m_Floor;
     private Rigidbody m_AgentRb;
     private CrowdEnvManager m_Parent;
-    private float m_Punisher;
+    // private float m_Punisher;
     private bool m_Done;
     private bool m_Fail;
+
+    private Renderer m_Rend;
 
     public override void Initialize() {
         m_Done = false;
@@ -25,8 +27,10 @@ public class CrowdAgent : Agent
         m_Floor = m_Parent.instancePlane;
 
         m_AgentRb = GetComponent<Rigidbody>();
+        m_Rend = transform.GetChild(0).GetComponent<Renderer>();
+        m_Rend.material.color = Color.yellow;
 
-        m_Punisher = 0f;
+        // m_Punisher = 0f;
 
         m_AgentRb.angularVelocity = Vector3.zero;
         m_AgentRb.velocity = Vector3.zero;
@@ -69,7 +73,6 @@ public class CrowdAgent : Agent
 
         transform.Rotate(rotateDir, Time.fixedDeltaTime * 200f);
         m_AgentRb.AddForce(dirToGo * 2f, ForceMode.VelocityChange);
-    
     }
 
     public override void OnActionReceived(float[] vectorAction) {
@@ -82,8 +85,9 @@ public class CrowdAgent : Agent
         }
         
         if (m_Done == false && m_Fail == false) {
-            m_Punisher += 0.05f;
-            AddReward(-m_Punisher / maxStep);
+            // m_Punisher += 0.05f;
+            // AddReward(-m_Punisher / maxStep);
+            AddReward(-20f / maxStep);
         }
     }
 
@@ -97,6 +101,8 @@ public class CrowdAgent : Agent
 
                 m_Done = true;
 
+                m_Rend.material.color = Color.white;
+
                 m_AgentRb.angularVelocity = Vector3.zero;
                 m_AgentRb.velocity = Vector3.zero;
             } else if (collision.gameObject.CompareTag("Agent")) {
@@ -108,13 +114,17 @@ public class CrowdAgent : Agent
     public override void OnEpisodeBegin() {
         m_AgentRb.angularVelocity = Vector3.zero;
         m_AgentRb.velocity = Vector3.zero;
-        m_Punisher = 0f;
+        // m_Punisher = 0f;
 
         transform.position = m_Parent.RandomPosition();
 
         m_Fail = false;
         m_Done = false;
 
-        m_Parent.ResetCounters();
+        m_Parent.ActivateAll();
+
+        m_Rend.material.color = Color.yellow;
+
+        // m_Parent.ResetCounters();
     }
 }

@@ -119,22 +119,28 @@ public class CrowdEnvManager : MonoBehaviour
 
         ResetCounters();
 
-        ActivateAllFlags();
-
         foreach (var agent in m_Agents) {
             agent.GetComponent<CrowdAgent>().EndEpisode();
         }
+
+        ActivateReplaceAllFlags();
     }
 
-    public void SpawnFlag() {
-        var flag = SpawenerAtThePlane(instanceFlag, Quaternion.Euler(0, 90, 0));
-        flag.transform.GetChild(1).GetComponent<Renderer>().material.color = Color.red;
-    }
+    // public void SpawnFlag() {
+    //     var flag = SpawenerAtThePlane(instanceFlag, Quaternion.Euler(0, 90, 0));
+    //     flag.transform.GetChild(1).GetComponent<Renderer>().material.color = Color.red;
+    // }
 
-    public void ActivateAllFlags() {
+    public void ActivateReplaceAllFlags() {
         foreach (Transform child in transform) {
             child.gameObject.SetActive(true);
             child.position = RandomPosition();
+        }
+    }
+
+    public void ActivateAll() {
+        foreach (Transform child in transform) {
+            child.gameObject.SetActive(true);
         }
     }
 

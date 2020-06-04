@@ -480,7 +480,7 @@ MonoBehaviour:
     vectorActionSize: 06000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: bc3bfc3fefbdd49248fe369852319dd8, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 669e2058b5ddf47f38620258bf60548c, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Crowd
@@ -504,7 +504,7 @@ MonoBehaviour:
   - Flag
   m_RaysPerDirection: 9
   m_MaxRayDegrees: 90
-  m_SphereCastRadius: 0.5
+  m_SphereCastRadius: 1.5
   m_RayLength: 80
   m_RayLayerMask:
     serializedVersion: 2
@@ -512,8 +512,8 @@ MonoBehaviour:
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0.60967547, b: 0, a: 1}
   rayMissColor: {r: 0.15686275, g: 1, b: 1, a: 1}
-  m_StartVerticalOffset: 0
-  m_EndVerticalOffset: 0
+  m_StartVerticalOffset: 0.5
+  m_EndVerticalOffset: 0.5
 --- !u!114 &3780869860963425746
 MonoBehaviour:
   m_ObjectHideFlags: 0
