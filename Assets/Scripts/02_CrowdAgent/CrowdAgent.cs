@@ -2,8 +2,8 @@
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using MLAgents;
-using MLAgents.Sensors;
+using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
 
 public class CrowdAgent : Agent
 {
@@ -87,7 +87,7 @@ public class CrowdAgent : Agent
         if (m_Done == false && m_Fail == false) {
             // m_Punisher += 0.05f;
             // AddReward(-m_Punisher / maxStep);
-            AddReward(-20f / maxStep);
+            AddReward(-20f / MaxStep);
         }
     }
 

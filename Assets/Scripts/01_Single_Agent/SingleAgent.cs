@@ -2,8 +2,8 @@
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using MLAgents;
-using MLAgents.Sensors;
+using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
 
 public class SingleAgent : Agent
 {
@@ -109,7 +109,7 @@ public class SingleAgent : Agent
 
         m_punisher += 0.1f;
 
-        AddReward(-m_punisher / maxStep);
+        AddReward(-m_punisher / MaxStep);
     }
 
     IEnumerator RewardAndChangeMaterial(Color col, float time)
